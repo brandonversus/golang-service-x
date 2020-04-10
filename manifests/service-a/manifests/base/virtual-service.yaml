@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: service-a
+spec:
+  gateways:
+    - mesh
+  hosts:
+    - service-a
+  http:
+    - route:
+      - destination:
+          host: service-a
+          port: 
+            number: 8080

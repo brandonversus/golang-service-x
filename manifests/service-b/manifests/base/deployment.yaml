@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b
+  labels:
+    app: service-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+  template:
+    metadata:
+      labels:
+        app: service-b
+    spec:
+      containers:
+      - image: brandonversus/service-x:1.0.17
+        imagePullPolicy: IfNotPresent
+        name: service-b
+        ports:
+          - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: service-b
+        resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 3

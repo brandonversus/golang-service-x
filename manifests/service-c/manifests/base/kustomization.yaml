@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app: service-c
+
+configMapGenerator:
+- literals:
+  - NAME=service-c
+  - PORT=8080
+  name: service-c
+
+resources:
+- deployment.yaml
+- service.yaml
+- virtual-service.yaml
+images:
+- name: brandonversus/service-x
+  newName: brandonversus/service-x
+  newTag: 1.0.20

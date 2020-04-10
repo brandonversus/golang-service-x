@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-c
+  labels:
+    app: service-c
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-c
+  template:
+    metadata:
+      labels:
+        app: service-c
+    spec:
+      containers:
+      - image: brandonversus/service-x:1.0.17
+        imagePullPolicy: IfNotPresent
+        name: service-c
+        ports:
+          - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: service-c
+        resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 3
