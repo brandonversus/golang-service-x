@@ -1,6 +1,6 @@
 # Service-X
 
-This application is simple proxy that can be configured to chain calls to other services. In the manifests file, 
+This application is simple proxy that can easily be configured to chain calls to other services. I've found it very helpful for standing up applications quickly in GKE and testing routing configurations.
 
 ## Usage
 You can download the latest image from the **brandonversus** Docker Hub page here: https://hub.docker.com/repository/docker/brandonversus/service-x
